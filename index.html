@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inter College Competition Registrations</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #4a90e2; /* Solid background color (blue shade) */
+        padding: 20px;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    form {
+        background: #fff;
+        padding: 20px;
+        max-width: 400px;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+    }
+    label span.required {
+        color: red;
+        font-weight: normal;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+    .error {
+        border-color: #ff3b47 !important;
+    }
+    .success {
+        border-color: #39d353 !important;
+    }
+    small {
+        color: #ff3b47;
+        font-style: italic;
+        font-size: 12px;
+        display: block;
+        margin-top: 2px;
+    }
+    .char-count {
+        font-size: 12px;
+        color: #666;
+        text-align: right;
+    }
+    button {
+        margin-top: 15px;
+        padding: 10px;
+        width: 100%;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:disabled {
+        background: #6c757d;
+        cursor: not-allowed;
+    }
+    .gender-options {
+        margin-top: 5px;
+    }
+    .gender-options input {
+        width: auto;
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body>
+
+<form id="registrationForm" novalidate>
+    <h2>Inter College Competition Registrations</h2>
+
+    <label for="fullName">Full Name <span class="required">*</span></label>
+    <input type="text" id="fullName" placeholder="Enter your full name" required>
+    <small></small>
+
+    <label for="email">Email Address <span class="required">*</span></label>
+    <input type="email" id="email" placeholder="you@example.com" required>
+    <small></small>
+
+    <label for="phone">Phone Number <span class="required">*</span></label>
+    <input type="tel" id="phone" placeholder="10-digit phone" required>
+    <small></small>
+
+    <label for="age">Age <span class="required">*</span></label>
+    <input type="number" id="age" placeholder="Your age" required>
+    <small></small>
+
+    <label>Gender <span class="required">*</span></label>
+    <div class="gender-options">
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+    </div>
+    <small></small>
+
+    <label for="eventType">Event Type <span class="required">*</span></label>
+    <select id="eventType" required>
+        <option value="">-- Select Event --</option>
+        <option>Workshop</option>
+        <option>Seminar</option>
+        <option>Competition</option>
+    </select>
+    <small></small>
+
+    <label for="comments">Comments (optional)</label>
+    <textarea id="comments" maxlength="300" rows="4" placeholder="Any additional info..."></textarea>
+    <div class="char-count" id="charCount">0 / 300</div>
+
+    <button type="submit" disabled>Register</button>
+</form>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const button = form.querySelector('button');
+    const charCount = document.getElementById('charCount');
+    const commentsInput = document.getElementById('comments');
+
+    const validators = {
+        fullName: value => {
+            value = value.trim();
+            return (/^[A-Za-z\s]{3,}$/.test(value) || "Name must be at least 3 letters and contain only alphabets.");
+        },
+        email: value => {
+            return (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "Invalid email format.");
+        },
+        phone: value => {
+            return (/^\d{10}$/.test(value) || "Phone must be exactly 10 digits.");
+        },
+        age: value => {
+            return ((Number(value) >= 18) || "You must be at least 18 years old.");
+        },
+        gender: () => {
+            return (form.querySelector('input[name="gender"]:checked') !== null || "Select a gender.");
+        },
+        eventType: value => {
+            return (value.trim() !== "" || "Please select an event type.");
+        }
+    };
+
+    function validateField(id) {
+        let field = form.querySelector(`#${id}`);
+        let value = field ? field.value : '';
+        let valid;
+        if (id === 'gender') {
+            valid = validators.gender();
+        } else {
+            valid = validators[id](value);
+        }
+        let errorElement;
+
+        if (id === 'gender') {
+            errorElement = form.querySelector('input[name="gender"]').parentElement.nextElementSibling;
+        } else {
+            errorElement = field.nextElementSibling;
+        }
+
+        if (valid === true) {
+            if (field) {
+                field.classList.remove('error');
+                field.classList.add('success');
+            }
+            errorElement.textContent = '';
+            return true;
+        } else {
+            if (field) {
+                field.classList.remove('success');
+                field.classList.add('error');
+            }
+            errorElement.textContent = valid;
+            return false;
+        }
+    }
+
+    function checkForm() {
+        let allValid = true;
+        for (let key in validators) {
+            if (!validateField(key)) {
+                allValid = false;
+            }
+        }
+        button.disabled = !allValid;
+    }
+
+    form.querySelectorAll('input[required], select[required]').forEach(input => {
+        input.addEventListener('input', () => {
+            validateField(input.id);
+            checkForm();
+        });
+    });
+
+    form.querySelectorAll('input[name="gender"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            validateField('gender');
+            checkForm();
+        });
+    });
+
+    commentsInput.addEventListener('input', () => {
+        charCount.textContent = `${commentsInput.value.length} / 300`;
+    });
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!button.disabled) {
+            alert('🎉 Registration Successful!');
+            form.reset();
+            button.disabled = true;
+            charCount.textContent = '0 / 300';
+            form.querySelectorAll('input, select, textarea').forEach(el => {
+                el.classList.remove('success', 'error');
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
