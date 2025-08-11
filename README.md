@@ -1,72 +1,66 @@
-# 🎓 Inter College Competition Registration Form
+# 🏡 Community Event Registration Form
 
 Link: https://event-registration-sree-sai-raghavs-projects.vercel.app/
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/75c1d82e-1493-4d95-86d2-2265d70a15e8" />
-
+<img width="1919" height="1014" alt="image" src="https://github.com/user-attachments/assets/4c6bcdd7-b651-4026-99e7-99df56a382fa" />
 
 ## 📋 Overview
-This project is a **responsive HTML, CSS, and JavaScript form** for registering participants in an **Inter College Competition**.
+This project is a **responsive HTML, CSS, and JavaScript form** designed for **Community Event sign‑ups**.
 
 It includes:
-- **Real-time input validation** (name, email, phone, age, gender, event type)
-- **Custom error messages** and visual feedback
-- **Character counter** for optional comments
-- **Submit button enabled only when all inputs are valid**
-
-The form is styled with a **solid blue background**, and the registration card is centered for a clean, accessible UI.
+- **Real‑time validation** with instant feedback
+- **Custom error messages** for each field
+- **Clean, user‑friendly UI**
+- **Submit button enabled only when the form is valid**
 
 ---
 
 ## 🛠 Technologies Used
-- **HTML5** – Structure
-- **CSS3** – Styles, colors, layouts
-- **Vanilla JavaScript (ES6)** – Validation & interactivity
-
----
+- **HTML5** – Semantic form structure
+- **CSS3** – Styling, layout, and user feedback cues
+- **Vanilla JavaScript (ES6)** – Input validation and interactivity
 
 
 ---
 
 ## 🚀 Features
 - ✅ **Full Name validation** – Only letters and spaces, min 3 characters  
-- ✅ **Email validation** – Must match standard format  
-- ✅ **Phone validation** – Exactly 10 digits  
-- ✅ **Age restriction** – ≥ 18 years old  
+- ✅ **Email validation** – Must follow standard email format  
+- ✅ **Phone validation** – Exactly 10 digits (customizable)  
+- ✅ **Age restriction** – Must be ≥ 18 years old  
 - ✅ **Gender selection required**  
-- ✅ **Event type selection required**  
-- ✅ **Optional comments** – Max 300 chars with live counter  
-- ✅ **Error messages** – Specific, shown under each invalid field  
-- ✅ **Visual feedback** – Green border for valid, red for invalid  
-- ✅ **Success reset** – Clears after successful submission  
+- ✅ **Event type selection required** (Workshop, Seminar, Competition, etc.)  
+- ✅ **Optional comments** – Max 300 characters with live counter  
+- ✅ **Field‑specific error messages** – Displayed directly below invalid inputs  
+- ✅ **Visual cues** – Green border for valid fields, red for invalid  
+- ✅ **Automatic state reset** – Clears styles after successful submission  
 
 ---
 
 ## 📋 Validation Rules
 | Field        | Requirement |
 |--------------|-------------|
-| **Full Name** | Letters & spaces only, ≥ 3 chars |
+| **Full Name** | Only letters & spaces, ≥ 3 characters |
 | **Email**     | Valid email format |
-| **Phone**     | 10 digits only |
-| **Age**       | Must be ≥ 18 |
-| **Gender**    | Mandatory |
-| **Event Type**| Mandatory |
-| **Comments**  | Optional; ≤ 300 chars |
+| **Phone**     | Exactly 10 digits |
+| **Age**       | Must be 18 or older |
+| **Gender**    | Must select Male or Female |
+| **Event Type**| Must choose from dropdown |
+| **Comments**  | Optional, max 300 characters |
 
 
 ---
 
 ## 🧪 Testing Suggestions
-- Leave fields blank → Errors shown, button disabled  
-- Wrong email format → Error message instantly  
-- Phone < 10 digits → Error message instantly  
-- Age = 17 → Fail  
-- Age = 18 → Pass  
-- Comments > 300 chars → Counter stops at 300  
+- Leave required fields empty → Should display clear error messages  
+- Try invalid email (e.g., `abc@`) → Should show `"Invalid email format"`  
+- Phone less/more than 10 digits → Should show `"Phone must be exactly 10 digits"`  
+- Age = 17 → Should be rejected  
+- Age = 18 → Passes validation  
+- Comments over 300 chars → Input should stop or warning shown  
 
 ---
 
 ## 📜 License
-This project is **free to use** for education and personal purposes.
+This project is **free to use** for educational and personal purposes.
 
 ---
-
